@@ -1,4 +1,5 @@
 Job Title,Company Name,Location,Job Link,Recommended Resume,Missing Keywords to Add,Match Score
+Quantitative Analyst II (Capital Structuring & Analytics),affirm,Remote US,https://job-boards.greenhouse.io/affirm/jobs/7815952003,DS_Finance,,5
 Software Engineer - Content Ingestion,roku,"Austin, Texas",https://www.weareroku.com/jobs/8158015?gh_jid=8158015,SWE,C++ -> Programming Languages line; Bash/Shell -> Programming Languages line,5
 "Software Engineer, Embedded Agentic AI",roku,"Austin, Texas",https://www.weareroku.com/jobs/7991641?gh_jid=7991641,ML,Observability (no matching line yet); Docker -> Cloud / DevOps / MLOps Tools line; C++ -> Programming Languages line,4
 "Software Engineer, Embedded Agentic AI",roku,"San Jose, California",https://www.weareroku.com/jobs/8065793?gh_jid=8065793,ML,Observability (no matching line yet); Docker -> Cloud / DevOps / MLOps Tools line; C++ -> Programming Languages line,4
@@ -41,6 +42,7 @@ Graduate Software Engineer,imc,"Chicago, United States",https://job-boards.eu.gr
 "Software Engineer, Spark Platform",doordashusa,"San Francisco, CA; Seattle, WA; Sunnyvale, CA; New York, NY",https://job-boards.greenhouse.io/doordashusa/jobs/8044370,SWE,Scala -> Programming Languages line; Go (Golang) -> Programming Languages line,5
 "Software Engineer, Storage",doordashusa,"San Francisco, CA; Seattle, WA; New York, NY",https://job-boards.greenhouse.io/doordashusa/jobs/8024644,SWE,Go (Golang) -> Programming Languages line; DynamoDB -> Databases & Storage line,5
 C++ Software Engineer,imc,"Chicago, United States; New York, United States",https://job-boards.eu.greenhouse.io/imc/jobs/4673650101,SWE,C++ -> Programming Languages line,1
+Graduate Quantitative Researcher (BS/MS),imc,"Chicago, United States",https://job-boards.eu.greenhouse.io/imc/jobs/4907368101,DS_Finance,C++ -> Programming Languages line,4
 Machine Learning Researcher,imc,"Chicago, United States; New York, United States",https://job-boards.eu.greenhouse.io/imc/jobs/4699252101,DS,,5
 "Software Engineer, Early Career",imc,"Chicago, United States",https://job-boards.eu.greenhouse.io/imc/jobs/4577504101,SWE,C++ -> Programming Languages line,3
 "Software Engineer I, Memberships",amazon,"San Francisco, California, USA",https://www.amazon.jobs/en/jobs/10515912/software-engineer-i-memberships,SWE,TypeScript -> Programming Languages line; React -> Software Engineering Practices line; Go (Golang) -> Programming Languages line; DynamoDB -> Databases & Storage line,3
