@@ -2,8 +2,10 @@ name: jobscan
 
 on:
   schedule:
-    - cron: '0 1 * * *'   # 21:00 America/New_York during EDT
-    - cron: '0 2 * * *'   # 21:00 America/New_York during EST
+    # GitHub cron is UTC-only, so both fire every day; the "Skip off-hour
+    # schedule" step below drops whichever one isn't 21:00 in New York.
+    - cron: '0 1 * * *'   # 21:00 America/New_York while EDT (UTC-4)
+    - cron: '0 2 * * *'   # 21:00 America/New_York while EST (UTC-5)
   workflow_dispatch:
     inputs:
       tier:
@@ -31,22 +33,42 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      # Both schedules fire daily; only the one that lands on 21:00 in New York
+      # should proceed, otherwise you get a second run an hour off.  Manual
+      # workflow_dispatch runs are never skipped.
+      - name: Skip off-hour schedule
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            h=$(TZ=America/New_York date +%H)
+            echo "New York hour: $h"
+            if [ "$h" != "21" ]; then
+              echo "not 21:00 in New York -- skipping this run"
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip != 'true'
 
       - uses: actions/setup-python@v5
+        if: steps.gate.outputs.skip != 'true'
         with:
           python-version: '3.11'   # Playwright needs >=3.8
           cache: pip
 
       - run: pip install -r requirements.txt
+        if: steps.gate.outputs.skip != 'true'
 
       # Chromium is only needed for the browser-backed boards (Meta).  Those
       # fail soft, so keep going even if this step has a bad day.
       - name: Install Playwright + Chromium
+        if: steps.gate.outputs.skip != 'true'
         continue-on-error: true
         run: python -m playwright install --with-deps chromium
 
       - name: Verify headless Chromium
+        if: steps.gate.outputs.skip != 'true'
         continue-on-error: true
         run: |
           python - <<'PY'
@@ -62,6 +84,7 @@ jobs:
       # scan_all.py runs the browser boards in a subprocess using the
       # interpreter it is itself running under (3.11 here).
       - name: Run scan
+        if: steps.gate.outputs.skip != 'true'
         run: |
           python scan_all.py \
             "${{ github.event.inputs.tier || '1' }}" \
@@ -69,6 +92,7 @@ jobs:
             | tee scan_output.txt
 
       - name: Email new roles
+        if: steps.gate.outputs.skip != 'true'
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
@@ -79,7 +103,7 @@ jobs:
         run: python notify.py
 
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.gate.outputs.skip != 'true'
         with:
           name: jobscan-results
           path: |
@@ -87,7 +111,7 @@ jobs:
             passed.json
 
       - name: Persist state
-        if: github.event.inputs.dry_run != '1'
+        if: steps.gate.outputs.skip != 'true' && github.event.inputs.dry_run != '1'
         run: |
           git config user.name github-actions
           git config user.email actions@github.com
