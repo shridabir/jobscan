@@ -117,8 +117,10 @@ def family_of(title):
     return 'SWE'
 
 # map a family to the resume files that serve it, best first
-PREF={'SWE':['SWE','DE','DS'],'ML':['DS','SWE','DE'],
-      'DS':['DS','DS_Finance','SWE'],'DE':['DE','SWE','DS']}
+PREF={'SWE':['SWE','ML','DE','DS'],
+      'ML' :['ML','DS','SWE','DE'],      # dedicated full-time ML resume
+      'DS' :['DS','ML','DS_Finance','SWE'],
+      'DE' :['DE','SWE','ML','DS']}
 
 def skill_headers(tag,resumes):
     """Section headers inside the SKILLS block only -- otherwise the fallback
@@ -134,7 +136,8 @@ ALT={'Databases & Storage':['Distributed Systems & Data Pipelines','Distributed 
      'Distributed Systems & Data Pipelines':['Distributed Systems & Cloud','Systems & Distributed Computing',
                            'Cloud / DevOps / MLOps'],
      'Systems & Distributed Computing':['Distributed Systems & Cloud','Distributed Systems & Data Pipelines'],
-     'Cloud / DevOps / MLOps':['Distributed Systems & Cloud','Distributed Systems & Data Pipelines'],
+     'Cloud / DevOps / MLOps':['Cloud / DevOps / MLOps Tools','Distributed Systems & Cloud',
+                           'Distributed Systems & Data Pipelines'],
      'Software Engineering Practices':['Cloud / DevOps / MLOps','Distributed Systems & Cloud'],
      'Statistics & Experimentation':['Analytics & Visualization','Data Visualization & BI'],
      'Data Visualization & BI':['Analytics & Visualization','Statistics & Experimentation'],
@@ -163,8 +166,9 @@ def evaluate(title,text,resumes,fin_hint=False):
     if not jd: return None,None,[]
     fam=family_of(title)
     order=[t for t in PREF.get(fam,['SWE']) if t in resumes] or sorted(resumes)
-    # DS_Finance is a niche variant: only consider it for finance-flavoured DS/ML
-    if not (fin_hint and fam in ('DS','ML')): order=[t for t in order if t!='DS_Finance']
+    # DS_Finance is a niche variant: finance-flavoured DATA SCIENCE only.  It
+    # must not out-rank the ML resume just because the employer is a bank.
+    if not (fin_hint and fam=='DS'): order=[t for t in order if t!='DS_Finance']
     elif 'DS_Finance' in resumes: order=['DS_Finance']+[t for t in order if t!='DS_Finance']
     # weight each posting skill by how often it is mentioned, so a C++-centric
     # role is scored on C++ rather than on incidental keywords
@@ -176,7 +180,7 @@ def evaluate(title,text,resumes,fin_hint=False):
     for rank,tag in enumerate(order):
         have=skills_in(resumes[tag])
         cov=sum(w for k,w in wt.items() if k in have)/total
-        scored.append((round(cov,3)-rank*0.02,cov,tag))
+        scored.append((round(cov,3)-rank*0.05,cov,tag))
     scored.sort(reverse=True)
     _,cov,best=scored[0]
     have=skills_in(resumes[best])

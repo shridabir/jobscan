@@ -83,6 +83,26 @@ jobs:
 
       # scan_all.py runs the browser boards in a subprocess using the
       # interpreter it is itself running under (3.11 here).
+      # Resumes are PII and this repo is public, so they are kept in a secret
+      # (base64 of a JSON {tag: text} map) and written to resumes/ at runtime.
+      - name: Materialise resumes
+        if: steps.gate.outputs.skip != 'true'
+        env:
+          RESUMES_B64: ${{ secrets.RESUMES_B64 }}
+        run: |
+          if [ -z "$RESUMES_B64" ]; then
+            echo "RESUMES_B64 not set -- scan will run without resume advice"
+            exit 0
+          fi
+          python - <<'PY'
+          import base64,gzip,json,os
+          os.makedirs('resumes',exist_ok=True)
+          raw=gzip.decompress(base64.b64decode(os.environ['RESUMES_B64']))
+          for tag,txt in json.loads(raw).items():
+              open('resumes/%s.txt'%tag,'w').write(txt)
+              print('wrote resumes/%s.txt (%d chars)'%(tag,len(txt)))
+          PY
+
       - name: Run scan
         if: steps.gate.outputs.skip != 'true'
         run: |
@@ -96,7 +116,7 @@ jobs:
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          MAIL_TO: ${{ secrets.MAIL_TO || 'sddabir@andrew.cmu.edu' }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           DRY_RUN: ${{ github.event.inputs.dry_run || '0' }}
