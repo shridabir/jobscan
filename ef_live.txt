@@ -1,0 +1,2 @@
+explore.jobs.netflix.net|netflix.com
+netapp.eightfold.ai|netapp.com

@@ -4,7 +4,20 @@ on:
   schedule:
     - cron: '0 1 * * *'   # 21:00 America/New_York during EDT
     - cron: '0 2 * * *'   # 21:00 America/New_York during EST
-  workflow_dispatch:       # lets you run it by hand from the Actions tab
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: 'Tier to scan (1 = majors only, 2 = others, blank = both)'
+        required: false
+        default: '1'
+      hours:
+        description: 'Posting window in hours'
+        required: false
+        default: '72'
+      dry_run:
+        description: 'Render the email but do not send it (1 = dry run)'
+        required: false
+        default: '0'
 
 permissions:
   contents: write          # needed to commit seen.json back to the repo
@@ -16,29 +29,69 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'   # Playwright needs >=3.8
           cache: pip
 
       - run: pip install -r requirements.txt
 
-      - name: Run scanner
-        run: python scan2.py
+      # Chromium is only needed for the browser-backed boards (Meta).  Those
+      # fail soft, so keep going even if this step has a bad day.
+      - name: Install Playwright + Chromium
+        continue-on-error: true
+        run: python -m playwright install --with-deps chromium
+
+      - name: Verify headless Chromium
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              b = p.chromium.launch(headless=True,
+                                    args=['--no-sandbox','--disable-dev-shm-usage'])
+              pg = b.new_page(); pg.goto('https://example.com', timeout=30000)
+              print('headless chromium OK:', pg.title())
+              b.close()
+          PY
+
+      # scan_all.py runs the browser boards in a subprocess using the
+      # interpreter it is itself running under (3.11 here).
+      - name: Run scan
+        run: |
+          python scan_all.py \
+            "${{ github.event.inputs.tier || '1' }}" \
+            "${{ github.event.inputs.hours || '72' }}" \
+            | tee scan_output.txt
+
+      - name: Email new roles
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          MAIL_TO: sddabir@andrew.cmu.edu
+          MAIL_TO: ${{ secrets.MAIL_TO || 'sddabir@andrew.cmu.edu' }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || '0' }}
+        run: python notify.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jobscan-results
+          path: |
+            scan_output.txt
+            passed.json
 
       - name: Persist state
+        if: github.event.inputs.dry_run != '1'
         run: |
           git config user.name github-actions
           git config user.email actions@github.com
-          git add -- seen.json 2>/dev/null || true
+          git add -- seen.json || true
           git diff --cached --quiet && exit 0
           git commit -m "state $(date -u +%F)"
           git push

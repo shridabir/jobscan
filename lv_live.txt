@@ -4,12 +4,13 @@ clari
 gopuff
 hive
 latch
-leverdemo
 matchgroup
 metabase
 mistral
+neon
 olo
 palantir
+shieldai
 spotify
 tala
 voleon
