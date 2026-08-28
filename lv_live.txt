@@ -1,0 +1,16 @@
+binance
+brightwheel
+clari
+gopuff
+hive
+latch
+leverdemo
+matchgroup
+metabase
+mistral
+olo
+palantir
+spotify
+tala
+voleon
+wealthfront

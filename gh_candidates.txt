@@ -1,0 +1,45 @@
+databricks stripe figma coinbase instacart cloudflare samsara affirm discord reddit
+anthropic openai scaleai robinhood gitlab benchling airtable asana brex checkr
+chime dropbox duolingo flexport grammarly hashicorp lyft mongodb notion nuro
+patreon pinterest quora rippling roblox snowflake sofi twilio unity verkada
+wealthfront zscaler datadog elastic confluent hubspot okta purestorage vercel retool
+sourcegraph wayfair peloton applied-intuition waymo attentive amplitude gusto plaid ramp
+deel gong klaviyo netlify launchdarkly postman sentry tempus thumbtack toast
+tripadvisor twitch udemy vimeo zapier zendesk zoox palantir pagerduty newrelic
+nextdoor opendoor oscar outreach pendo planet procore quantcast redis remitly
+replit salesloft sigmacomputing smartsheet snyk sprinklr squarespace strava sumologic tanium
+thoughtspot turo upwork veeva workato yelp zillow zocdoc 1password abnormalsecurity
+acorns addepar adyen airbyte algolia alloy alteryx angi anyscale apolloio
+appfolio arcadia arcticwolf arize articulate assembled astranis atlassian aurora automattic
+avalara axon bandwidth betterment bigcommerce billiontoone bitgo blend bolt box
+braze bungie c3ai calendly canva carta cedar celonis chainalysis chargepoint
+chewy circle circleci clari clever clickup cockroachlabs coda cohere collibra
+color compass contentful coreweave cresta cribl crowdstrike cruise cultureamp curology
+databento datavant dbtlabs deepgram degreed dialpad digitalocean docusign doximity drata
+dremio druva dutchie dynatrace ebay eightfold enfusion envoy equipmentshare esusu
+etsy everlaw evernote expel faire fanatics fastly fetch fivetran flatiron
+forter freshworks fubo gemini getir gitpod glassdoor glean gopuff grafana
+greenhouse groq guild handshake harness headway hedgehog hinge hippo honeycomb
+huntress imply included instabase intercom invitae ironclad jasper jerry jumpcloud
+justworks kandji kargo kayak keeper kin kitman kong kraken lacework
+lattice leaflink lendingclub lever lightmatter linear literati livongo loom lucid
+lumafield mapbox marqeta masterclass matterport mercury mercari meridianlink mesh miro
+modernhealth moloco monzo motive mural nasdaq navan neo4j netskope nerdwallet
+niantic nightfall noom nord notarize nuvation nylas oaknorth observe ocrolus
+olo omadahealth onetrust openweb opensea optimizely orum outschool ownbackup pachyderm
+pantheon papaya parafin pave paxos peakon pelago perimeterx persona philo
+pigment pilot pindrop placer plangrid podium pointclickcare policygenius pontera postscript
+prefect primer prisma productboard project44 propel prove pulumi qualtrics quantumscape
+quizlet radar rain rapid7 reonomy restaurant365 revel rewind rigetti ripple
+riskified rivian rockset rokt rula runway saildrone salesforce samsara scribd seatgeek
+securonix semgrep sentilink shef shieldai shift4 shipbob shippo signifyd
+simplisafe sisense skydio slack snorkelai socure solugen sonar soundhound spothero
+spring squarepoint stackblitz starburst starry stord strapi stytch superhuman supabase
+sword synack synthego tackle tala talkdesk tanium tealium teleport tempo
+tenable terminal tessian testrail tetrascience thirtymadison tia tile tonal torch
+tradeshift transfix tremendous truebill truework trumid tulip tuple twelvelabs uipath
+unit unqork upgrade uplight urbint valon vanta vareto vast vaya
+vayner vectra veho vena veo verbit verily veza viam
+vial vic vida vidyard viridian visby vise vivint vouch voltus
+wander warby watershed wave weave webflow wefox whatnot whoop wiz
+workrise wrapbook writer xometry yotpo zededa zeta zip zocdoc zuora
