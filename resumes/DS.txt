@@ -1,0 +1,66 @@
+ 
+ 
+SHRIRANG DABIR 
+sddabir@andrew.cmu.edu ⎸ linkedin.com/shrirangdabir ⎸ github.com/shridabir ⎸ (412) 608-8694 ⎸ Pittsburgh, PA 
+EDUCATION 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+CARNEGIE MELLON UNIVERSITY Pittsburgh, PA 
+Master of Information Systems Management (GPA: 3.61/4) (Aug 2025 – Dec 2026) 
+Relevant Coursework: Machine Learning, Deep Learning, Generative AI, Distributed Systems, Statistics, Econometrics, Agentic AI, OOP in Java 
+Graduate Teaching Assistant: 11-785 – Introduction to Deep Learning (Fall 2026), 95-706 – Object Oriented Analysis and Design (Spring 2026) 
+ 
+UNIVERSITY AT BUFFALO (SUNY) Buffalo, NY 
+Bachelor of Science in Information Technology and Management (GPA: 3.82/4) (Aug 2019 – Jun 2023) 
+Awards & Honors: Summa Cum Laude (Highest Honors), Dean’s List: Fall 2019, Spring 2021, Fall 2021, Merit Scholarship 
+Relevant Coursework: Computer Science, Data Structures, Database Management Systems, Big Data, Systems Design, Calculus, Cybersecurity 
+ 
+SKILLS 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Programming Languages: Python (PyTorch, Scikit-learn, TensorFlow, NumPy, Pandas, FastAPI, PySpark), SQL, Java, R 
+Statistics & Experimentation: A/B Testing, Causal Inference, Hypothesis Testing, Regression & Classification Modeling, ROC/AUC Validation 
+Distributed Systems & Cloud: Apache Spark, Kafka, ETL/ELT, Data Modeling, AWS (S3, EMR, SageMaker), MLFlow, Weights and Biases, Git 
+LLMs & Agentic AI Frameworks: NLP, LLMs, RAG Architecture, LangChain, LangGraph 
+Data Visualization & BI: Power BI, Tableau, Dashboards, Data Storytelling 
+ 
+WORK EXPERIENCE 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Reclamation Factory Pittsburgh, PA 
+AI / ML Engineer | Internship (Jun 2026 – Aug 2026) 
+● Dual-Branch Model Architecture: Built and trained dual-branch acoustic classifier fusing AudioSet/ImageNet-pretrained Audio Spectrogram 
+Transformer (AST) with a hand-engineered decay-physics MLP branch for 4-class plastic-resin identification from impact recordings. 
+● Distribution-Shift Research: Identified session-level distribution shift, where models exploited microphone/room fingerprints over physics, 
+and established Leave-One-Session-Out (LOSO) as the honest generalization estimate, exposing an ~8-point optimistic bias in k-fold CV. 
+● Feature Engineering: Engineered a 13-dim spectral/decay feature set and 4-gate LOSO audit using eta-squared resin-vs-session discrimination. 
+● Model Validation and Deployment: Designed a production gatekeeper with confidence-based throughput controls, targeting ~90% precision; 
+validated acoustic models against real-world recycling conditions and diagnosed performance gaps between controlled and deployed settings. 
+ 
+Oncquest NSL Laboratories Nashik, India 
+Data Scientist | Full-Time (Feb 2025 – Jul 2025) 
+● Predictive Modeling: Engineered XGBoost inventory optimization pipelines for lab kits, improving stock efficiency by 40%. 
+● Production ML: Translated complex profitability logic into production-grade pipelines, reducing model iteration and deployment time by 30%. 
+● Model Development: Designed Random Forest models for near-expiry kit prioritization, cutting consumable waste and excess costs by 15%. 
+● Analytics & Dashboards: Embedded profitability metrics into PowerBI dashboards for hospital partners, enabling data-driven decision-making. 
+ 
+Impact Infotech (Wipro, Client: HSBC) Pune, India 
+Analyst – Data Engineer | Contract (Sep 2024 – Dec 2024) 
+● Distributed Pipelines: Developed distributed PySpark pipelines on AWS EMR, scaling data processing for risk analytics. 
+● CI/CD Automation: Automated end-to-end ML and reporting workflows with CI/CD-ready pipelines, cutting reporting latency by 30%. 
+● Query Optimization: Optimized SQL queries and Spark transformations on Data Lake, reducing processing time by 25% for larger datasets. 
+● API Integration: Collaborated with global teams to integrate RESTful API endpoints for data consumption across financial dashboards. 
+ 
+ACADEMIC PROJECTS 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Credit Risk Modeling | Python, Pandas, Scikit-learn, XGBoost, Power BI 
+● Constructed a loan default prediction pipeline with Logistic Regression and XGBoost, engineering financial features from structured 
+credit data; validated model performance via ROC curves and confusion matrices, achieving AUC 0.91 on held-out validation data. 
+● Deployed Power BI dashboards to track portfolio risk exposure, enabling stakeholders to monitor high-risk segments in real time 
+ 
+End-to-End Automatic Speech Recognition System | Python, PyTorch, HuggingFace, Transformers, NumPy, WandB 
+● Architected and trained an end-to-end Encoder-Decoder Transformer to process downsampled Mel-spectrograms, utilizing a joint CTC-
+Attention loss framework and SpecAugment techniques to achieve robust acoustic alignment across noisy, variable-length audio. 
+● Engineered a custom Beam Search decoding algorithm and conducted ablation testing on Shallow Fusion techniques, bypassing language 
+model sequence bottlenecks to achieve a 11.1% Character Error Rate (CER) on complex test datasets. 
+ 
+Agentic RAG System for Healthcare | Python, LangGraph, ChromaDB, OpenAI, Tavily 
+● Developed Agentic RAG pipeline using LangGraph with LLM-based routing across clinical narratives, medical Q&A data, device manuals. 
+● Implemented relevance-verification and retry logic to reduce hallucinations, enabling safe multi-step reasoning across a healthcare domain. 

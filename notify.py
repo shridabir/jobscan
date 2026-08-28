@@ -46,13 +46,21 @@ def render(rows):
         parts.append("<h2 style='font-size:16px;margin:18px 0 8px'>%s &mdash; %d new</h2>"%(label,len(grp)))
         for r in grp:
             spon=' &middot; <b>sponsors</b>' if r.get('pos')=='YES' else ''
+            fit=''
+            if r.get('resume'):
+                stars='&#9679;'*int(r.get('fit') or 0)+'&#9675;'*(5-int(r.get('fit') or 0))
+                add=('<br><span style="color:#8a6d1f">add: %s</span>'%esc('; '.join(r.get('add') or []))
+                     ) if r.get('add') else ''
+                fit=("<br><span style='font-size:12px;color:#333'>resume <b>%s</b> "
+                     "<span style='color:#0b5cad;letter-spacing:1px'>%s</span> %s/5%s</span>"
+                     %(esc(r['resume']),stars,esc(r.get('fit')),add))
             parts.append(
               "<div style='margin:0 0 14px;padding-left:10px;border-left:3px solid #ddd'>"
               "<a href='%s' style='font-weight:600;color:#0b5cad;text-decoration:none'>%s</a><br>"
               "<span style='color:#444'>%s &middot; %s</span><br>"
-              "<span style='color:#777;font-size:12px'>%s &middot; %s%s</span></div>"
+              "<span style='color:#777;font-size:12px'>%s &middot; %s%s</span>%s</div>"
               %(esc(r.get('url')),esc(r.get('title')),esc(r.get('co')),esc(r.get('loc')),
-                esc(fmt_when(r)),esc(r.get('why')),spon))
+                esc(fmt_when(r)),esc(r.get('why')),spon,fit))
     parts.append("</div>")
     return ''.join(parts)
 
@@ -66,6 +74,9 @@ def render_text(rows):
             out.append("%s | %s | %s"%(r.get('title'),r.get('co'),r.get('loc')))
             out.append("   %s | %s%s"%(fmt_when(r),r.get('why'),
                                        ' | SPONSORS' if r.get('pos')=='YES' else ''))
+            if r.get('resume'):
+                out.append("   resume: %s  %s/5%s"%(r['resume'],r.get('fit'),
+                           ('  |  add: '+'; '.join(r.get('add') or [])) if r.get('add') else ''))
             out.append("   %s"%r.get('url'))
         out.append('')
     return '\n'.join(out)

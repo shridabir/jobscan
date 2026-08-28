@@ -1,0 +1,67 @@
+ 
+ 
+SHRIRANG DABIR 
+sddabir@andrew.cmu.edu ⎸ linkedin.com/in/shrirangdabir ⎸ github.com/shridabir ⎸ (412) 608-8694 ⎸ Pittsburgh, PA 
+EDUCATION 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+CARNEGIE MELLON UNIVERSITY Pittsburgh, PA 
+Master of Information Systems Management (GPA: 3.61/4) (Aug 2025 – Dec 2026) 
+Relevant Coursework: Distributed Systems, Cloud Computing, OOP in Java, Deep Learning, Operationalizing AI, Econometrics, Statistics 
+Graduate Teaching Assistant: 11-785 – Introduction to Deep Learning (Fall 2026), 95-706 – Object Oriented Analysis and Design (Spring 2026) 
+ 
+UNIVERSITY AT BUFFALO (SUNY) Buffalo, NY 
+Bachelor of Science in Information Technology and Management (GPA: 3.82/4) (Aug 2019 – Jun 2023) 
+Awards & Honors: Summa Cum Laude (Highest Honors), Dean’s List: Fall 2019, Spring 2021, Fall 2021, Merit Scholarship 
+Relevant Coursework: Computer Science, Systems Design, Data Structures & Algorithms, Database Systems, Big Data, Calculus, Cybersecurity 
+ 
+SKILLS 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Programming Languages: Python (NumPy, PyTorch, Scikit-learn, PySpark, FastAPI), SQL, Java, Scala 
+Databases & Storage: MySQL, PostgreSQL, MongoDB, Cassandra, Redis, Vector Databases 
+Distributed Systems & Data Pipelines: Apache Spark, Kafka, Hadoop, ETL/ELT, Data Modeling 
+Cloud / DevOps / MLOps: AWS (EC2, EMR, S3, EKS, SageMaker AI), GCP, Kubernetes, Terraform, Helm, Linux/Unix, Docker, Git, MLFlow 
+Analytics & Visualization: Statistical Analysis, Regression & Classification Modeling, ROC/AUC Validation, Power BI, Tableau 
+AI & Agentic Tools: LLMs, Prompt Engineering, Agent Orchestration, RAG Architecture, LangChain, LangGraph 
+ 
+WORK EXPERIENCE 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Reclamation Factory Pittsburgh, PA 
+Machine Learning Engineer | Internship (Jun 2026 – Aug 2026) 
+● Model Architecture: Built and trained on AWS SageMaker AI a dual -branch acoustic classifier fusing AudioSet /ImageNet-pretrained Audio 
+Spectrogram Transformer (AST) with a hand-engineered physics MLP branch for 4-class plastic-resin identification from impact recordings. 
+● Cloud Infrastructure & CI/CD: Architected and deployed end-to-end AWS SageMaker training and evaluation pipelines with reproducible, 
+config-driven workflows and versioned artifacts persisted to S3, standardizing a 4-class classification system. 
+● Backend Service Development: Designed a Flask-based data-collection microservice exposing REST endpoints with environment-scoped AWS 
+credentials, enabling standardized, labeled data intake uploaded directly to S3 across the team. 
+● Reliability & Debugging: Diagnosed and resolved silent configuration failures spanning training and inference paths by centralizing 
+environment configuration into a single dictionary-based lookup, eliminating cross-environment failures. 
+ 
+Oncquest NSL Laboratories Nashik, India 
+Data Scientist | Full-Time (Jan 2025 – Jul 2025) 
+● Production ML: Translated complex profitability logic into production-grade pipelines, reducing model iteration and deployment time by 30%. 
+● Predictive Modeling: Engineered XGBoost and Random Forest pipelines for inventory optimization and near -expiry prioritization, improving 
+stock efficiency by 40% and cutting waste by 15%. 
+● Analytics & Dashboards: Embedded profitability metrics into PowerBI dashboards for hospital partners, enabling data-driven decision-making. 
+ 
+Impact Infotech (Wipro, Client: HSBC) Pune, India 
+Analyst – Data Engineer | Contract (Sep 2024 – Dec 2024) 
+● Distributed Systems: Developed PySpark pipelines on AWS EMR, scaling data processing for high-throughput financial workloads. 
+● Query Optimization: Optimized SQL queries and Spark transformations on a Data Lake, reducing job runtime by 25% for larger datasets. 
+● CI/CD Automation: Automated data and reporting workflows via CI/CD with data-quality validation checks, cutting latency by 30%. 
+● API Development: Integrated RESTful API endpoints with engineering teams to serve data across downstream financial systems. 
+ 
+ACADEMIC PROJECTS 
+⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺ 
+Distributed Stream Processing Pipeline | Apache Kafka, Apache Samza, AWS EMR 
+● Engineered a real-time stream-processing pipeline on AWS EMR with Kafka and Samza, ingesting 700k+ events across partitioned 
+topics and running stateful Samza jobs that matched riders to drivers on a weighted score over distance, rating, and cost. 
+ 
+Twitter User Recommendation System | Spark, Kubernetes, AWS EKS, GCP 
+● Architected a high-throughput distributed microservice serving 16,000+ RPS under sustained load, backed by a Spark ETL pipeline on 
+GCP that processed 1TB+ of raw tweets to compute pairwise interaction and hashtag co-occurrence signals. 
+● Migrated infrastructure across two phases from self-managed Kubernetes (kOps) to managed AWS EKS with RDS MySQL under a 
+$0.65/hr budget, automating zero-downtime Helm releases through a GitHub Actions CI/CD pipeline. 
+ 
+Credit Risk Modeling | Python, Pandas, Scikit-learn, XGBoost, Power BI 
+● Constructed a loan default prediction pipeline with Logistic Regression and XGBoost, achieving a 0.91 AUC via engineered financial 
+features, and deployed Power BI dashboards to enable stakeholders to monitor high-risk segments in real time. 

@@ -12,6 +12,8 @@ Filters: posted/updated <=24h, role family, non-senior, US location,
 import json,re,html,sys,os,csv,urllib.request,ssl,concurrent.futures as cf
 from datetime import datetime,timedelta,timezone
 import sources as SRC
+try: import match as MATCH
+except Exception: MATCH=None
 
 ROLE=re.compile(r'\b(software|backend|back-end|frontend|front-end|full[- ]?stack|platform|infrastructure|systems?|applied|research)\s+(engineer|developer|scientist)|\bsoftware development engineer\b|\b(machine|deep)\s+learning\b[a-z /&-]{0,26}?\b(engineer|scientist|researcher|developer)\b|\bml\b[a-z /&-]{0,20}?\b(engineer|scientist|researcher)\b|\bmle\b|\bai\b[a-z /&-]{0,18}?\b(engineer|scientist|researcher)\b|\bdata\s+engineer\b|\bdata\s+scien(tist|ce)\b|\banalytics\s+engineer\b|\bswe\b',re.I)
 SENIOR=re.compile(r'\b(senior|sr\.?|staff|principal|lead|manager|director|head|vp|architect|distinguished|fellow|intern|internship|phd)\b',re.I)
@@ -277,7 +279,27 @@ sys.stderr.write("  majors (tier1): %d of %d\n"%(sum(1 for r in rows if r.get('t
 
 def age_h(t): return (now-t).total_seconds()/3600.0
 
+RESUMES=MATCH.load_resumes() if MATCH else {}
+if MATCH and not RESUMES:
+    sys.stderr.write("  note: resumes/ is empty -- no resume advice in this run\n")
+FIN=re.compile(r'bank|trading|financial|capital|invest|payment|fintech|hedge|securities',re.I)
+for r in rows:
+    r['resume'],r['fit'],r['add']=(None,None,[])
+    if RESUMES:
+        hint=bool(FIN.search(r['co']+' '+r['title']+' '+(r['text'] or '')[:2000]))
+        r['resume'],r['fit'],r['add']=MATCH.evaluate(r['title'],r['text'],RESUMES,fin_hint=hint)
+
+# the CSV the older workflow produced, regenerated from the live scan
+with open('results.csv','w') as f:
+    w=csv.writer(f)
+    w.writerow(['Job Title','Company Name','Location','Job Link','Recommended Resume',
+                'Missing Keywords to Add','Match Score'])
+    for r in sorted(rows,key=lambda x:(x.get('tier',2),x['datekind']=='undated',-x['ts'].timestamp())):
+        w.writerow([r['title'],r['co'],r['loc'],r['url'],r.get('resume') or '',
+                    '; '.join(r.get('add') or []),r.get('fit') or ''])
+
 json.dump([dict(tier=r.get('tier',2),src=r['src'],co=r['co'],title=r['title'],loc=r['loc'],url=r['url'],
+                resume=r.get('resume'),fit=r.get('fit'),add=r.get('add') or [],
                 ts=r['ts'].isoformat(),
                 posted=(None if r['datekind']=='undated' else r['ts'].strftime('%Y-%m-%d %H:%M UTC')),
                 age_hours=(None if r['datekind']=='undated' else round(age_h(r['ts']),1)),
@@ -304,4 +326,7 @@ for tier in sorted({r.get('tier',2) for r in rows}):
     for r in grp:
         print("%s | [%s/%s] %s | %s | %s | sponsor:%s"%(
             stamp(r),r['src'],r['co'],r['title'],r['loc'][:44],r['why'],r['pos']))
+        if r.get('resume'):
+            print("        resume: %s (%s/5)%s"%(r['resume'],r['fit'],
+                  ('  add: '+'; '.join(r['add'])) if r.get('add') else ''))
         print("        %s"%r['url'])
