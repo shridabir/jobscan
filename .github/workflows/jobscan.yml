@@ -1,0 +1,44 @@
+name: jobscan
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # 21:00 America/New_York during EDT
+    - cron: '0 2 * * *'   # 21:00 America/New_York during EST
+  workflow_dispatch:       # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write          # needed to commit seen.json back to the repo
+
+concurrency:
+  group: jobscan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run scanner
+        run: python scan2.py
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: sddabir@andrew.cmu.edu
+
+      - name: Persist state
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add -- seen.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "state $(date -u +%F)"
+          git push
