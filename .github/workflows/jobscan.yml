@@ -33,19 +33,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      # Both schedules fire daily; only the one that lands on 21:00 in New York
-      # should proceed, otherwise you get a second run an hour off.  Manual
-      # workflow_dispatch runs are never skipped.
-      - name: Skip off-hour schedule
+      # Both schedules fire daily and only one of them is 21:00 in New York.
+      # Decide from WHICH CRON fired, not from the clock: GitHub routinely runs
+      # scheduled jobs hours late (we have seen 7h), and a wall-clock check
+      # skips both runs when that happens -- which is exactly what it did.
+      - name: Skip the off-season schedule
         id: gate
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            h=$(TZ=America/New_York date +%H)
-            echo "New York hour: $h"
-            if [ "$h" != "21" ]; then
-              echo "not 21:00 in New York -- skipping this run"
-              echo "skip=true" >> "$GITHUB_OUTPUT"
-            fi
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "manual run -- proceeding"; exit 0
+          fi
+          fired='${{ github.event.schedule }}'
+          # -0400 while EDT, -0500 while EST
+          off=$(TZ=America/New_York date +%z)
+          case "$off" in
+            -0400) want='0 1 * * *' ;;   # 01:00 UTC == 21:00 EDT
+            -0500) want='0 2 * * *' ;;   # 02:00 UTC == 21:00 EST
+            *)     want="$fired" ;;      # unexpected offset: do not skip
+          esac
+          echo "fired='$fired'  ny_offset=$off  want='$want'"
+          if [ "$fired" != "$want" ]; then
+            echo "off-season schedule -- skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: actions/checkout@v4
