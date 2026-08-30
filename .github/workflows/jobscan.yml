@@ -2,10 +2,11 @@ name: jobscan
 
 on:
   schedule:
-    # GitHub cron is UTC-only, so both fire every day; the "Skip off-hour
-    # schedule" step below drops whichever one isn't 21:00 in New York.
-    - cron: '0 1 * * *'   # 21:00 America/New_York while EDT (UTC-4)
-    - cron: '0 2 * * *'   # 21:00 America/New_York while EST (UTC-5)
+    # GitHub's scheduler is best-effort and has run this 7h late, so don't rely
+    # on any single firing.  Try hourly across the window 21:00 ET -> 08:00 ET;
+    # the gate below lets exactly ONE of them through per 9pm slot, so the mail
+    # goes out on the first attempt GitHub actually honours.
+    - cron: '0 1-12 * * *'
   workflow_dispatch:
     inputs:
       tier:
@@ -33,32 +34,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      # Both schedules fire daily and only one of them is 21:00 in New York.
-      # Decide from WHICH CRON fired, not from the clock: GitHub routinely runs
-      # scheduled jobs hours late (we have seen 7h), and a wall-clock check
-      # skips both runs when that happens -- which is exactly what it did.
-      - name: Skip the off-season schedule
+      - uses: actions/checkout@v4
+
+      # One send per 9pm-ET slot, however late GitHub gets around to running us.
+      # The slot is the date of the most recent 21:00 ET that has passed; once a
+      # run completes for that slot it is recorded in .last_sent and the
+      # remaining hourly attempts exit in seconds.
+      - name: Should this run send?
         id: gate
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "manual run -- proceeding"; exit 0
+            echo "manual run -- proceeding"
+            echo "slot=manual" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          fired='${{ github.event.schedule }}'
-          # -0400 while EDT, -0500 while EST
-          off=$(TZ=America/New_York date +%z)
-          case "$off" in
-            -0400) want='0 1 * * *' ;;   # 01:00 UTC == 21:00 EDT
-            -0500) want='0 2 * * *' ;;   # 02:00 UTC == 21:00 EST
-            *)     want="$fired" ;;      # unexpected offset: do not skip
-          esac
-          echo "fired='$fired'  ny_offset=$off  want='$want'"
-          if [ "$fired" != "$want" ]; then
-            echo "off-season schedule -- skipping"
+          h=$(TZ=America/New_York date +%H)
+          if [ "$h" -ge 21 ]; then slot=$(TZ=America/New_York date +%F)
+          else slot=$(TZ=America/New_York date -d 'yesterday' +%F); fi
+          done_slot=$(cat .last_sent 2>/dev/null || echo none)
+          echo "ny=$(TZ=America/New_York date '+%F %H:%M')  slot=$slot  last_sent=$done_slot"
+          if [ "$slot" = "$done_slot" ]; then
+            echo "already sent for this slot -- skipping"
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
-
-      - uses: actions/checkout@v4
-        if: steps.gate.outputs.skip != 'true'
+          echo "slot=$slot" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
         if: steps.gate.outputs.skip != 'true'
@@ -144,7 +142,8 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email actions@github.com
-          git add -- seen.json || true
+          echo "${{ steps.gate.outputs.slot }}" > .last_sent
+          git add -- seen.json .last_sent || true
           git diff --cached --quiet && exit 0
           git commit -m "state $(date -u +%F)"
           git push
