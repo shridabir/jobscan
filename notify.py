@@ -104,10 +104,19 @@ def main():
         if not dry: save_seen(seen,rows,now)
         return 0
 
-    subject="jobscan: %d new role%s (%d major)"%(
-        len(new),'' if len(new)==1 else 's',sum(1 for r in new if r.get('tier',2)==1))
-    body_txt=render_text(new) or "No new roles."
-    body_html=render(new) or "<p>No new roles.</p>"
+    if new:
+        subject="jobscan: %d new role%s (%d major)"%(
+            len(new),'' if len(new)==1 else 's',sum(1 for r in new if r.get('tier',2)==1))
+    else:
+        subject="jobscan: no new roles today"
+    note=("%d role%s currently match in the scanned window; all of them were in "
+          "an earlier email."%(len(rows),'' if len(rows)==1 else 's')) if rows else \
+         "Nothing matched the filters in the scanned window."
+    body_txt=render_text(new) or ("No new roles since the last email.\n%s\n"%note)
+    body_html=render(new) or (
+        "<div style='font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px'>"
+        "<p>No new roles since the last email.</p>"
+        "<p style='color:#777;font-size:12px'>%s</p></div>"%note)
 
     if dry:
         print("SUBJECT:",subject); print(); print(body_txt)

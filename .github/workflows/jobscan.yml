@@ -127,6 +127,9 @@ jobs:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           DRY_RUN: ${{ github.event.inputs.dry_run || '0' }}
+          # Always send, even with nothing new: a quiet day and a broken
+          # workflow otherwise look identical from the inbox.
+          ALWAYS_SEND: '1'
         run: python notify.py
 
       - uses: actions/upload-artifact@v4
