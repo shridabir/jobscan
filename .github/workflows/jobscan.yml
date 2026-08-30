@@ -21,6 +21,10 @@ on:
         description: 'Render the email but do not send it (1 = dry run)'
         required: false
         default: '0'
+      claim_slot:
+        description: "Record tonight's slot so the GitHub hourly fallback stands down (1 = yes)"
+        required: false
+        default: '0'
 
 permissions:
   contents: write          # needed to commit seen.json back to the repo
@@ -43,10 +47,13 @@ jobs:
       - name: Should this run send?
         id: gate
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "manual run -- proceeding"
+          claim='${{ github.event.inputs.claim_slot }}'
+          if [ "${{ github.event_name }}" != "schedule" ] && [ "$claim" != "1" ]; then
+            echo "ad-hoc manual run -- proceeding without claiming a slot"
             echo "slot=manual" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          # scheduled runs, and the punctual 9pm trigger, share one slot so only
+          # the first of them sends
           h=$(TZ=America/New_York date +%H)
           if [ "$h" -ge 21 ]; then slot=$(TZ=America/New_York date +%F)
           else slot=$(TZ=America/New_York date -d 'yesterday' +%F); fi
